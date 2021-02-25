@@ -65,6 +65,7 @@ public class LoginServlet extends HttpServlet {
             // Set the username in a session so it'll be available on each request.
             // Set as true to create a new session if one doesn't exists yet.
             req.getSession(true).setAttribute(Constants.USERNAME, usernameFromParameter.trim());
+            req.getSession(true).setAttribute(Constants.MEMBER_ID, engine.getMemberPerUsername(usernameFromParameter.trim()).getID());
 
             if (engine.getMemberPerUsername(usernameFromParameter).isAdmin())
                 resp.sendRedirect(Constants.MAIN_MENU_URL_ADMIN);
