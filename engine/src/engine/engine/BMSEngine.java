@@ -279,4 +279,6 @@ public interface BMSEngine {
     List<Boat> getRelevantBoatsPerRowersMostCommonLevelFrequency(List<Level> commonLevels, List<Boat> availableBoats);
 
     public Member getMemberPerUsername(String email);
+
+    List<BoatType> getBoatTypeListFromStringArray(String[] boatTypesAsStringArray);
 }

@@ -1,0 +1,112 @@
+.nav{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    /*width: 200px;*/
+    background-color: #f1f1f1;
+}
+
+.info{
+    width: 100%;
+    float: left;
+}
+.subNav label:hover{background-color: aquamarine;}
+.show {display: block;}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    /*width: 200px;*/
+    background-color: #f1f1f1;
+}
+
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color on hover */
+li a:hover {
+    background-color: #555;
+    color: white;
+}
+
+.button {
+    background-color: bisque;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+#sideNav{
+    float: left;
+    overflow: hidden;
+    background-color: blue;
+    width: 20%;
+    height: 70%;
+    float: inside;
+}
+
+#windows{
+    float: left;
+    overflow: hidden;
+    background-color: blue;
+    width: 30%;
+    height: 100%;
+    margin-left: 5%;
+}
+
+#booking{
+    float: left;
+    width: 40%;
+    height: 100%;
+    margin-left: 5%;
+}
+
+#windowsUL{
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+.windowButton{
+    background-color: cadetblue;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+
+    display: block;
+    font-size:11px;
+    padding:4px 2px;
+    border:solid 1px #aacfe4;
+    margin:2px 0 20px 10px;
+}
+
+.windowButton:hover{
+    background-color: lightblue;
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+}
+
+
+#bookingForm input{
+    display: block;
+    padding:4px 2px;
+    border:solid 1px #aacfe4;
+    width:30%;
+    margin:2px 0 20px 10px;
+}

@@ -51,8 +51,6 @@ public class Booking implements Serializable {
     private List<BoatType> requestedBoatTypes; // Can choose more than one boat type.
 
     @XmlElement
-    //private List<Member> otherParticipatingRowers = new ArrayList<>(); /* If at least one of the boats requested can include more than one rower,
-                                   //  Then the requester can add other members from the club to the booking. */
     private List<Integer> otherParticipatingRowersIDs = new ArrayList<>();
 
     public void setCounter(int max){

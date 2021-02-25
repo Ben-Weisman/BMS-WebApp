@@ -1,5 +1,7 @@
 package engine.classes.member;
 
+import engine.alerts.MemberNotification;
+import engine.alerts.MemberNotificationManager;
 import engine.xmlAdapters.XmlLocalDateAdapter;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,7 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 
@@ -54,6 +56,8 @@ public class Member implements Serializable {
     @XmlElement
     private boolean isManager;
 
+    private MemberNotificationManager notificationManager = new MemberNotificationManager();;
+
     public Member(){}
     public Member(String name, int age, String comments, Level level, LocalDate joiningDate, LocalDate expirationDate, boolean hasPrivateBoat, String privateBoatSerialNumber, String phoneNumber, String emailAddress, String password, boolean isManager) {
         this.name = name;
@@ -69,6 +73,7 @@ public class Member implements Serializable {
         this.emailAddress = emailAddress;
         this.password = password;
         this.isManager = isManager;
+
 
     }
 
@@ -89,10 +94,20 @@ public class Member implements Serializable {
 
     }
 
+    public void addAutoNotification(MemberNotification mn){
+        this.notificationManager.addAutoNotification(mn);
+    }
+    public List<MemberNotification> getAutoNotification(){
+        return this.notificationManager.getAutoNotifications();
+    }
 
 
-
-
+    public void addAdminNotification(MemberNotification newNot){
+        this.notificationManager.addAdminNotification(newNot);
+    }
+    public List<MemberNotification> getAdminNotifications(int chatVersion){
+        return this.notificationManager.getAdminNotifications(chatVersion);
+    }
 
 
     public void setCounter(int num){
@@ -219,5 +234,9 @@ public class Member implements Serializable {
     public void removePrivateBoat() {
         setHasPrivateBoat(false);
         this.privateBoatSerialNumber = "";
+    }
+
+    public MemberNotificationManager getNotificationsManager() {
+        return this.notificationManager;
     }
 }

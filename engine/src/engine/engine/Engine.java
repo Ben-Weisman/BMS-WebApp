@@ -139,7 +139,7 @@ public class Engine implements BMSEngine {
     public void updateMemberName(String memberName, String newName) throws InvalidInputException, NotfoundException, JAXBException {
         engine.classes.member.Member userToUpdate = getMemberFromNameString(memberName);
 
-        if (!userToUpdate.getName().equals(newName)) {
+        if (!userToUpdate.getName().equalsIgnoreCase(newName)) {
             userToUpdate.setName(newName);
             saveEngineStateToXML();
         } else throw new InvalidInputException("Name already identical to previous name.");
@@ -214,15 +214,15 @@ public class Engine implements BMSEngine {
     public List<Booking> generateRequestsHistoryOfTheUSer(int userID) {
         LocalDate now = LocalDate.now();
         LocalDate sevenDaysAgo = now.minusDays(7);
-        List<Booking> readOnlyBookingsHistoryRes = new ArrayList<>();
+        List<Booking> res = new ArrayList<>();
 
         for (Booking b : bookings) {
             if (b.getMemberOrderedID() == userID)
                 if (b.getRequestedPracticeDate().isAfter(sevenDaysAgo) && b.getRequestedPracticeDate().isBefore(now))
-                    readOnlyBookingsHistoryRes.add(b);
+                    res.add(b);
         }
 
-        return readOnlyBookingsHistoryRes;
+        return Collections.unmodifiableList(res);
     }
 
     public void addAdminUserForProgramAccess() {
@@ -1676,6 +1676,19 @@ public class Engine implements BMSEngine {
                 return m;
         }
         return null;
+    }
+
+    @Override
+    public List<engine.classes.boat.BoatType> getBoatTypeListFromStringArray(String[] boatTypesAsStringArray) {
+        List<engine.classes.boat.BoatType> resList = new ArrayList<>();
+        if (boatTypesAsStringArray.length == 0)
+            return resList;
+        for (int i=0;i<boatTypesAsStringArray.length;i++){
+            engine.classes.boat.BoatType type = getBoatTypeFromString(boatTypesAsStringArray[i]);
+            if (type != null)
+                resList.add(type);
+        }
+        return resList;
     }
 
 }
