@@ -474,7 +474,7 @@ public class Engine implements BMSEngine {
         if(toBeRemovedNotification.length() == 0)
             boats.remove(boatToRemove);
 
-        if (!forceRemove) throw new NeedToChangeOtherListingException(toBeRemovedNotification.toString());
+        else if (!forceRemove) throw new NeedToChangeOtherListingException(toBeRemovedNotification.toString());
 
         for (Booking booking : bookingsToRemove)
             removeBookingRequest(booking);
@@ -1190,7 +1190,8 @@ public class Engine implements BMSEngine {
         return res;
     }
 
-    private boolean isMemberIDExists(int id) {
+    @Override
+    public boolean isMemberIDExists(int id) {
         for (engine.classes.member.Member m :members)
             if (m.getID() == id)
                 return true;

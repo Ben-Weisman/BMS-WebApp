@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Remove Member</title>
+</head>
+<body>
+<form method="post" action="removeMember" id="removeMemberForm">
+    <label for="memberID">Member ID </label>
+    <input type="number" name="memberID" id="memberID" autofocus><br>
+
+    <h2 class="messagePlaceHolder"></h2>
+
+    <input type="submit" value="Remove Member">
+</form>
+
+<div>
+    <button id="getMembers">Get Members</button>
+    <ul id="listingListPlaceHolder"></ul>
+    <script src="/BMSWebApp/maintain/view/viewListing.js"></script>
+</div>
+
+<script src="removeMember.js"></script>
+</body>
+</html>

@@ -19,7 +19,7 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        System.out.println("login servlet:entered doPost");
         String usernameFromSession = SessionUtils.getUsername(req);
         BMSEngine engine = ServletUtils.getEngine(getServletContext());
         ActiveUsersManager activeUsersManager = ServletUtils.getActiveUserManager(getServletContext());
