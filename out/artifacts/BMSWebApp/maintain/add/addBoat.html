@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Boat</title>
+</head>
+<body>
+<h1>Add Boat</h1>
+<form method="post" action="addBoat" id="addBoatForm">
+
+    <label>Boat Name </label>
+    <input type="text" name="boatName" id="boatName" autofocus><br>
+
+    <label>Boat Type:<br>
+        <input type="radio" id="SINGLE" name="boatType" value="1X">
+        <label for="SINGLE">SINGLE</label>
+
+        <input type="radio" id="DOUBLE" name="boatType" value="2X">
+        <label for="DOUBLE">DOUBLE</label>
+
+        <input type="radio" id="COXED_DOUBLE" name="boatType" value="2X+" >
+        <label for="COXED_DOUBLE">COXED_DOUBLE</label>
+
+        <input type="radio" id="PAIR" name="boatType" value="2-" >
+        <label for="PAIR">PAIR</label>
+
+        <input type="radio" id="COXED_PAIR" name="boatType" value="2+" >
+        <label for="COXED_PAIR">COXED_PAIR</label>
+
+        <input type="radio" id="FOUR" name="boatType" value="4-" >
+        <label for="FOUR">FOUR</label>
+
+        <input type="radio" id="COXED_FOUR" name="boatType" value="4+" >
+        <label for="COXED_FOUR">COXED_FOUR</label>
+
+        <input type="radio" id="QUAD" name="boatType" value="4X-" >
+        <label for="QUAD">QUAD</label>
+
+        <input type="radio" id="COXED_QUAD" name="boatType" value="4X+" >
+        <label for="COXED_QUAD">COXED_QUAD</label>
+
+        <input type="radio" id="OCTUPLE" name="boatType" value="8X+" >
+        <label for="OCTUPLE">OCTUPLE</label>
+
+        <input type="radio" id="EIGHT" name="boatType" value="8+" >
+        <label for="EIGHT">EIGHT</label>
+
+    </label><br>
+
+    <label for="wideOrCoastal">Wide or coastal</label>
+    <input id="wideOrCoastal" list="wideOrCoastalList" required><br>
+    <datalist id="wideOrCoastalList">
+        <option value="no" selected>No</option>
+        <option value="wide">Wide</option>
+        <option value="coastal">Coastal</option>
+    </datalist>
+
+    <label>Private: </label>
+        <input type="checkbox" name="isPrivate" id="isPrivate"><br>
+    <h2 class="messagePlaceHolder"></h2>
+    <input type="submit" value="Add Boat">
+</form>
+
+<script src="addBoat.js"></script>
+</body>
+</html>

@@ -199,6 +199,8 @@ public interface BMSEngine {
 
     void importWindowsFromXML(boolean runOverCurrentList, String fileAsString)throws ImportXmlException,InvalidInputException,IllegalDataInXmlFileException;
 
+    boolean isMemberIDExists(int id);
+
     void addActivitiesToCurrentList(List<Timeframe> validRecords) throws InvalidInputException;
 
     boolean isPrivateBoatIDExistsInBoatsList(int idToFind);

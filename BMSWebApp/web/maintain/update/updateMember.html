@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Member</title>
+</head>
+<body>
+
+<form id="checkIfMemberExistForm">
+    <label for="memberID">Member ID </label>
+    <input type="number" name="memberID" id="memberID" autofocus min="1" required><br>
+
+    <input type="submit" value="Submit ID"><br>
+</form>
+
+<form id="updateMemberForm" style="display: none">
+
+    <label for="newName">New Name </label>
+    <input type="text" name="newName" id="newName"><br>
+
+    <label for="newAge">New Age </label>
+    <input type="number" name="newAge" id="newAge" min="1"><br>
+
+    <label for="newComments">New Comments </label>
+    <input type="text" name="newComments" id="newComments"><br>
+
+    <label for="newExpirationDate">New Expiration Date </label>
+    <input type="date" name="newExpirationDate" id="newExpirationDate"><br>
+
+    <label for="hasPrivateBoat">Has private boat </label>
+    <input type="checkbox" name="hasPrivateBoat" id="hasPrivateBoat" checked><br>
+
+    <label for="privateBoatSerialNumber">Private Boat Serial Number </label>
+    <input type="number" name="privateBoatSerialNumber" id="privateBoatSerialNumber" min="1"><br>
+
+    <label for="newPhone">New Phone Number
+    <input type="tel" id="newPhone" name="newPhone" minlength="9" maxlength="10"
+           required>
+    <small>9-10 digits</small>
+    </label><br>
+
+    <label for="newEmail">New Email </label>
+    <input type="email" id="newEmail" required><br>
+
+    <label for="newPassword">New password </label>
+    <input type="password" name="newPassword" id="newPassword"><br>
+
+    <label for="isManager">Is manager </label>
+    <input type="checkbox" name="isManager" id="isManager" checked><br>
+
+    <input type="submit" value="Update Member">
+</form>
+
+<h2 class="messagePlaceHolder"></h2>
+
+<div>
+    <button id="getMembers">Get Members</button>
+    <ul id="listingListPlaceHolder"></ul>
+    <script src="/BMSWebApp/maintain/view/viewListing.js"></script>
+</div>
+
+<script src="updateMember.js"></script>
+
+</body>
+</html>

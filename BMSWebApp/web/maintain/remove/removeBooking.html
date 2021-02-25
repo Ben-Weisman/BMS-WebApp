@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Remove Booking Request</title>
+</head>
+<body>
+<form method="post" action="removeBooking" id="removeBookingForm">
+    <label for="bookingID">Booking ID </label>
+    <input type="number" name="bookingID" id="bookingID" autofocus><br>
+
+    <h2 class="messagePlaceHolder"></h2>
+
+    <input type="submit" value="Remove Booking">
+</form>
+
+<div>
+    <button id="getBookings">Get Bookings</button>
+    <ul id="listingListPlaceHolder"></ul>
+    <script src="/BMSWebApp/maintain/view/viewListing.js"></script>
+</div>
+
+<script src="removeBooking.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Remove ScheduleWindow</title>
+</head>
+<body>
+<form method="post" action="removeScheduleWindow" id="removeScheduleWindowForm">
+    <label for="scheduleWindowName">Schedule Window Name</label>
+    <input type="text" name="scheduleWindowName" id="scheduleWindowName" autofocus><br>
+
+    <h2 class="messagePlaceHolder"></h2>
+
+    <input type="submit" value="Remove Schedule Window">
+</form>
+
+<div>
+    <button id="getScheduleWindows">Get Schedule Windows</button>
+    <ul id="listingListPlaceHolder"></ul>
+    <script src="/BMSWebApp/maintain/view/viewListing.js"></script>
+</div>
+
+<script src="removeScheduleWindow.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Boat</title>
+</head>
+<body>
+<form id="checkIfBoatExistForm">
+    <label for="boatID">Boat ID </label>
+    <input type="number" name="boatID" id="boatID" autofocus min="1" required><br>
+
+    <input type="submit" value="Submit ID"><br>
+</form>
+
+<form id="updateBoatForm" style="display: none">
+
+    <label for="newName">New Name </label>
+    <input type="text" name="newName" id="newName"><br>
+
+    <label>Boat Type:<br>
+        <input type="radio" id="SINGLE" name="newBoatType" value="SINGLE">
+        <label for="SINGLE">SINGLE</label>
+
+        <input type="radio" id="DOUBLE" name="newBoatType" value="DOUBLE">
+        <label for="DOUBLE">DOUBLE</label>
+
+        <input type="radio" id="COXED_DOUBLE" name="newBoatType" value="COXED_DOUBLE" >
+        <label for="COXED_DOUBLE">COXED_DOUBLE</label>
+
+        <input type="radio" id="PAIR" name="newBoatType" value="PAIR" >
+        <label for="PAIR">PAIR</label>
+
+        <input type="radio" id="COXED_PAIR" name="newBoatType" value="COXED_PAIR" >
+        <label for="COXED_PAIR">COXED_PAIR</label>
+
+        <input type="radio" id="FOUR" name="newBoatType" value="FOUR" >
+        <label for="FOUR">FOUR</label>
+
+        <input type="radio" id="COXED_FOUR" name="newBoatType" value="COXED_FOUR" >
+        <label for="COXED_FOUR">COXED_FOUR</label>
+
+        <input type="radio" id="QUAD" name="newBoatType" value="QUAD" >
+        <label for="QUAD">QUAD</label>
+
+        <input type="radio" id="COXED_QUAD" name="newBoatType" value="COXED_QUAD" >
+        <label for="COXED_QUAD">COXED_QUAD</label>
+
+        <input type="radio" id="OCTUPLE" name="newBoatType" value="OCTUPLE" >
+        <label for="OCTUPLE">OCTUPLE</label>
+
+        <input type="radio" id="EIGHT" name="newBoatType" value="EIGHT" >
+        <label for="EIGHT">EIGHT</label>
+
+        <input type="radio" id="none" name="newBoatType" value="" checked>
+        <label for="none">don't change</label>
+
+    </label><br>
+
+    <label for="isPrivate">Is boat private </label>
+    <input type="checkbox" name="isPrivate" id="isPrivate" checked><br>
+
+
+    <label for="isWide">Is boat wide </label>
+    <input type="checkbox" name="isWide" id="isWide" checked><br>
+
+
+    <label for="hasCoxwain">Has Coxwain </label>
+    <input type="checkbox" name="hasCoxwain" id="hasCoxwain" checked><br>
+
+
+    <label for="isCoastal">Is coastal </label>
+    <input type="checkbox" name="isCoastal" id="isCoastal" checked><br>
+
+
+    <label for="isFunctioning">Is boat functioning</label>
+    <input type="checkbox" name="isFunctioning" id="isFunctioning" checked><br>
+
+
+    <input type="submit" value="Update Boat">
+</form>
+
+<h2 class="messagePlaceHolder"></h2>
+<div>
+    <button id="getBoats">Get Boats</button>
+    <ul id="listingListPlaceHolder"></ul>
+    <script src="/BMSWebApp/maintain/view/viewListing.js"></script>
+</div>
+
+<script src="updateBoat.js"></script>
+</body>
+</html>

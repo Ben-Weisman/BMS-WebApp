@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Schedule Window</title>
+</head>
+<body>
+<form id="checkIfWindowExistForm">
+    <label for="windowName">Window Name </label>
+    <input type="text" id="windowName" autofocus required><br>
+
+    <input type="submit" value="Submit Name"><br>
+</form>
+
+<form id="updateScheduleWindowForm" style="display: none">
+
+    <label>Name
+        <input type="text" name="newScheduleWindowName" id="newScheduleWindowName" autofocus><br>
+    </label>
+
+    <label>Start time
+        <input type="time" id="newStartTime" name="newStartTime" max="23:00">
+    </label><br>
+
+    <label>End time
+        <input type="time" id="newEndTime" name="newEndTime" max="23:00">
+    </label><br>
+
+    <label>Boat Type:<br>
+        <input type="radio" id="SINGLE" name="boatType" value="SINGLE">
+        <label for="SINGLE">SINGLE</label>
+
+        <input type="radio" id="DOUBLE" name="boatType" value="DOUBLE">
+        <label for="DOUBLE">DOUBLE</label>
+
+        <input type="radio" id="COXED_DOUBLE" name="boatType" value="COXED_DOUBLE" >
+        <label for="COXED_DOUBLE">COXED_DOUBLE</label>
+
+        <input type="radio" id="PAIR" name="boatType" value="PAIR" >
+        <label for="PAIR">PAIR</label>
+
+        <input type="radio" id="COXED_PAIR" name="boatType" value="COXED_PAIR" >
+        <label for="COXED_PAIR">COXED_PAIR</label>
+
+        <input type="radio" id="FOUR" name="boatType" value="FOUR" >
+        <label for="FOUR">FOUR</label>
+
+        <input type="radio" id="COXED_FOUR" name="boatType" value="COXED_FOUR" >
+        <label for="COXED_FOUR">COXED_FOUR</label>
+
+        <input type="radio" id="QUAD" name="boatType" value="QUAD" >
+        <label for="QUAD">QUAD</label>
+
+        <input type="radio" id="COXED_QUAD" name="boatType" value="COXED_QUAD" >
+        <label for="COXED_QUAD">COXED_QUAD</label>
+
+        <input type="radio" id="OCTUPLE" name="boatType" value="OCTUPLE" >
+        <label for="OCTUPLE">OCTUPLE</label>
+
+        <input type="radio" id="EIGHT" name="boatType" value="EIGHT" >
+        <label for="EIGHT">EIGHT</label>
+
+        <input type="radio" id="none" name="boatType" value="" checked>
+        <label for="none">don't change</label>
+
+    </label><br>
+    <input type="submit" value="Update Schedule Window">
+</form>
+
+<h2 class="messagePlaceHolder"></h2>
+
+<div>
+    <button id="getScheduleWindows">Get Schedule Windows</button>
+    <ul id="listingListPlaceHolder"></ul>
+    <script src="/BMSWebApp/maintain/view/viewListing.js"></script>
+</div>
+
+<script src="updateScheduleWindow.js"></script>
+
+</body>
+</html>

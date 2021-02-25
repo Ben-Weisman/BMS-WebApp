@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Booking Request</title>
+</head>
+<body>
+<form id="checkIfBookingExistForm">
+    <label for="bookingID">Booking ID </label>
+    <input type="number" name="bookingID" id="bookingID" autofocus min="1" required><br>
+
+    <input type="submit" value="Submit ID"><br>
+</form>
+
+<form id="updateBookingRequestForm" style="display: none">
+    <label>Practice date
+        <input type="date" id="practiceDate">
+    </label><br>
+
+    <label for="newWindowID">New Schedule Window ID </label>
+    <input type="number" id="newWindowID"><br>
+
+    <label for="newAssignedBoatID">New Assigned Boat ID </label>
+    <input type="number" id="newAssignedBoatID"><br>
+
+    <label>Boat Types:<br>
+        <input type="checkbox" id="SINGLE" name="boatType" value="SINGLE">
+        <label for="SINGLE">SINGLE</label>
+
+        <input type="checkbox" id="DOUBLE" name="boatType" value="DOUBLE">
+        <label for="DOUBLE">DOUBLE</label>
+
+        <input type="checkbox" id="COXED_DOUBLE" name="boatType" value="COXED_DOUBLE" >
+        <label for="COXED_DOUBLE">COXED_DOUBLE</label>
+
+        <input type="checkbox" id="PAIR" name="boatType" value="PAIR" >
+        <label for="PAIR">PAIR</label>
+
+        <input type="checkbox" id="COXED_PAIR" name="boatType" value="COXED_PAIR" >
+        <label for="COXED_PAIR">COXED_PAIR</label>
+
+        <input type="checkbox" id="FOUR" name="boatType" value="FOUR" >
+        <label for="FOUR">FOUR</label>
+
+        <input type="checkbox" id="COXED_FOUR" name="boatType" value="COXED_FOUR" >
+        <label for="COXED_FOUR">COXED_FOUR</label>
+
+        <input type="checkbox" id="QUAD" name="boatType" value="QUAD" >
+        <label for="QUAD">QUAD</label>
+
+        <input type="checkbox" id="COXED_QUAD" name="boatType" value="COXED_QUAD" >
+        <label for="COXED_QUAD">COXED_QUAD</label>
+
+        <input type="checkbox" id="OCTUPLE" name="boatType" value="OCTUPLE" >
+        <label for="OCTUPLE">OCTUPLE</label>
+
+        <input type="checkbox" id="EIGHT" name="boatType" value="EIGHT" >
+        <label for="EIGHT">EIGHT</label>
+
+    </label><br>
+
+    <label for="otherParticipatingRowersID">New Other Participating Rowers ID </label><small id="otherParticipatingRowersIDSmall"></small>
+    <input type="number" id="otherParticipatingRowersID"><br>
+
+    <input type="submit" value="Update Booking Request">
+</form>
+
+<h2 class="messagePlaceHolder"></h2>
+
+<div>
+    <button id="getBookings">Get Bookings</button>
+    <ul id="listingListPlaceHolder"></ul>
+    <script src="/BMSWebApp/maintain/view/viewListing.js"></script>
+</div>
+
+<script src="updateBookingRequest.js"></script>
+
+
+</body>
+</html>
