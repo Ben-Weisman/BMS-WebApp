@@ -105,6 +105,10 @@ public class Member implements Serializable {
     public void addAdminNotification(MemberNotification newNot){
         this.notificationManager.addAdminNotification(newNot);
     }
+    public void deleteAdminNotification(String notificationMessageToRemove){
+        this.notificationManager.deleteAdminNotification(notificationMessageToRemove);
+    }
+
     public List<MemberNotification> getAdminNotifications(int chatVersion){
         return this.notificationManager.getAdminNotifications(chatVersion);
     }

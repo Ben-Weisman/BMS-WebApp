@@ -12,6 +12,8 @@ function injectSideNavBar(){
         "        <li><a href=\"watchBookingRequests.html\">Watch Booking Requests</a> </li>\n" +
         "        <li><a href=\"importFromXML.html\">Import From XML</a> </li>\n" +
         "        <li><a href=\"exportToXML.html\">Export To XML</a> </li>\n" +
+        "        <li><a href=\"addNotification.html\">Add Notification</a> </li>\n" +
+        "        <li><a href=\"deleteNotification.html\">Delete Notification</a> </li>\n" +
         "    </ul>\n" +
         "</nav>";
 

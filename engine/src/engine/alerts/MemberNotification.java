@@ -28,5 +28,7 @@ public class MemberNotification implements Comparable<MemberNotification>{
         return timestamp;
     }
 
-
+    public String getMessage() {
+        return message;
+    }
 }
