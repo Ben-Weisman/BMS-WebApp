@@ -1,4 +1,4 @@
-const getWindowsListURL = 'getWindowsList';
+const getWindowsListURL = '/BMSWebApp/getWindowsList';
 const windowsDivEL = document.querySelector('#windows');
 const bookingDiv = document.querySelector('#booking');
 const otherMembersSelectionArray = [];

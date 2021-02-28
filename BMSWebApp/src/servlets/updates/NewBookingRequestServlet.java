@@ -132,11 +132,12 @@ public class NewBookingRequestServlet extends HttpServlet {
         List<Integer> otherParticipatingRowersIDs = new ArrayList<>();
         List<BoatType> requestedBoatTypes = new ArrayList<>();
 
-        String boatTypesAsString = new Gson().fromJson(jsonObject.get("requestedBoatTypes").toString().trim(), String.class);
-        if (!boatTypesAsString.equals("")){
-            String[] boatsArray = boatTypesAsString.split(",");
-            requestedBoatTypes = engine.getBoatTypeListFromStringArray(boatsArray);
-        }
+
+            String boatTypesAsString = new Gson().fromJson(jsonObject.get("requestedBoatTypes").toString().trim(), String.class);
+            if (!boatTypesAsString.equals("")){
+                String[] boatsArray = boatTypesAsString.split(",");
+                requestedBoatTypes = engine.getBoatTypeListFromStringArray(boatsArray);
+            }
 
 
         String otherRowersIDsString = new Gson().fromJson(jsonObject.get("otherParticipatingRowersIDs").toString().trim(), String.class);
@@ -179,4 +180,12 @@ public class NewBookingRequestServlet extends HttpServlet {
         processRequest(req, resp);
     }
 
+
+    private List<BoatType> stringArrayToBoatTypeList(String[] arr) {
+        List<BoatType> toReturn = new ArrayList<>();
+        for (String type : arr) {
+            toReturn.add(BoatType.valueOf(type));
+        }
+        return toReturn;
+    }
 }

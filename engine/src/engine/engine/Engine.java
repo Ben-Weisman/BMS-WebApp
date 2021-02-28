@@ -400,7 +400,8 @@ public class Engine implements BMSEngine {
     public engine.classes.boat.BoatType getBoatTypeFromString(String boatStringRepresentation) {
         engine.classes.boat.BoatType boatType = null;
         for (engine.classes.boat.BoatType CurrBoatType : engine.classes.boat.BoatType.values()) {
-            if (CurrBoatType.getSymbol().equalsIgnoreCase(boatStringRepresentation)) {
+            if (CurrBoatType.getSymbol().equalsIgnoreCase(boatStringRepresentation)
+                    || CurrBoatType.name().equalsIgnoreCase(boatStringRepresentation)) {
                 boatType = CurrBoatType;
                 break;
             }
