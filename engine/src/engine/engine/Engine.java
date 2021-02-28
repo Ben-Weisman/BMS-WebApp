@@ -1694,12 +1694,12 @@ public class Engine implements BMSEngine {
     }
 
     @Override
-    public void removeRowersFromBooking(int bookingID, List<Integer> rowersIDs) {
+    public void removeRowersFromBooking(int bookingID, List<Integer> ids) {
         Booking booking = retrieveBookingPerID(bookingID);
 
-        for(Integer id: rowersIDs)
+        for(Integer id: ids)
             booking.removeParticipatingRower(id);
-
     }
+
 
 }

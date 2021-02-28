@@ -25,7 +25,7 @@ function updateNotifications(adminNotifications, autoNotifications) {
 }
 
 async function fetchNotificationsAsync() {
-    const response = await fetch('/BMSWebApp/pullNotifications');
+    const response = await fetch('/pullNotifications');
     const notificationsData = await response.json();
     /*
       data will receive in following json template:

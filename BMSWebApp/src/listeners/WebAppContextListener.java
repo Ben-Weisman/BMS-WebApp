@@ -35,23 +35,15 @@ public class WebAppContextListener implements ServletContextListener {
                 System.out.println(file.getAbsolutePath());
                 engine.loadEngine(file);
                 System.out.println("Engine state loaded successfully");
-            }
-            else{
+            } else {
                 System.out.println("Couldn't find the engineState file in path 'server\\src\\engineState.xml'.");
             }
             engine.addAdminUserForProgramAccess();
-            try {
-                engine.addNewWindow(new ScheduleWindowDetails("shun",LocalTime.parse("20:00"),LocalTime.parse("21:00"),null));
-                System.out.println("Window added successfully");
-            } catch (ExportToXmlException e) {
-                e.printStackTrace();
-            } catch (InvalidInputException e) {
-                e.printStackTrace();
-            }
             activeUsersManager.addUserID(engine.getMemberPerUsername("admin@gmail.com").getID());
         } catch (JAXBException e) {
             e.printStackTrace();
-        }    }
+        }
+    }
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {

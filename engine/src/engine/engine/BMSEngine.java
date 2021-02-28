@@ -284,6 +284,6 @@ public interface BMSEngine {
 
     List<BoatType> getBoatTypeListFromStringArray(String[] boatTypesAsStringArray);
 
-    void removeRowersFromBooking(int bookingID, List<Integer> rowersIDs);
 
+    void removeRowersFromBooking(int bookingID, List<Integer> ids);
 }
