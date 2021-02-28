@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="/BMSWebApp/pageLayout.css">
     <title>Update Member</title>
 </head>
 <body>
-
+<div id="sideNav" class="sideNav">
+    <nav>
+    </nav>
+</div>
 <form id="checkIfMemberExistForm">
     <label for="memberID">Member ID </label>
     <input type="number" name="memberID" id="memberID" autofocus min="1" required><br>
@@ -60,6 +63,7 @@
     <ul id="listingListPlaceHolder"></ul>
     <script src="/BMSWebApp/maintain/view/viewListing.js"></script>
 </div>
+<script type="text/javascript" src="/BMSWebApp/sideBarNav.js"></script>
 
 <script src="updateMember.js"></script>
 

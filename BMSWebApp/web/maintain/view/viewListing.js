@@ -8,7 +8,7 @@ const listingUlEl = document.querySelector("#listingListPlaceHolder")
 function createLiEl(listing) {
     const li = document.createElement("li");
     for (let property in listing){
-        li.innerHTML += property + " : " + listing[property] + '<br>';
+        li.innerHTML += property + " : " + listing[property] + '<br><br>';
     }
     return li;
 }
