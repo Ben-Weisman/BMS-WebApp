@@ -35,7 +35,6 @@ public class UpdateScheduleWindowServlet extends HttpServlet {
             return;
         }
 
-
         BufferedReader reader = req.getReader();
         String updateScheduleWindowJsonString = reader.lines().collect(Collectors.joining());
 

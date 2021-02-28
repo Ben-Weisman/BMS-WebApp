@@ -2,7 +2,9 @@ package servlets.updates;
 
 import com.google.gson.Gson;
 import constants.Constants;
+import engine.alerts.MemberNotification;
 import engine.classes.boat.BoatType;
+import engine.classes.member.Member;
 import engine.customExceptions.BoatAssignmentException;
 import engine.customExceptions.ExportToXmlException;
 import engine.customExceptions.InvalidInputException;
@@ -53,12 +55,25 @@ public class UpdateBookingServlet extends HttpServlet {
 
             resp.setStatus(HttpServletResponse.SC_OK);
             resp.getWriter().write("ID: " + updateBookingDetails.bookingID + " was updated successful");
+            notifyRowers(updateBookingDetails, engine);
+
         } catch (NotfoundException e) {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
             resp.getWriter().write(e.getMessage());
         } catch (InvalidInputException | JAXBException | BoatAssignmentException e) {
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             resp.getWriter().write(e.getMessage());
+        }
+    }
+
+    private void notifyRowers(UpdateBookingDetails updateBookingDetails, BMSEngine engine) {
+        Member memberOrdered = engine.retrieveMemberPerID(engine.retrieveBookingPerID
+                (Integer.parseInt(updateBookingDetails.bookingID)).getMemberOrderedID());
+        memberOrdered.addAutoNotification(new MemberNotification("Booking edited by admin"));
+        for (Integer otherRowerID : engine.retrieveBookingPerID
+                (Integer.parseInt(updateBookingDetails.bookingID)).getOtherParticipatingRowersID()) {
+            engine.retrieveMemberPerID(otherRowerID).addAutoNotification(
+                    new MemberNotification("Booking edited by admin"));
         }
     }
 

@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import constants.Constants;
+import engine.alerts.MemberNotification;
 import engine.classes.member.Member;
 import engine.engine.BMSEngine;
 import utils.ServletUtils;
@@ -78,6 +79,17 @@ public class AddRowerServlet extends HttpServlet {
         }
         for (Integer id : ids)
             engine.retrieveBookingPerID(bookingID).getOtherParticipatingRowersID().add(id);
+
+        notifyRowers(bookingID, engine, rowersArr);
+
+    }
+
+    private void notifyRowers(int bookingID, BMSEngine engine, String[] rowersArr) {
+        for (String rower: rowersArr) {
+            engine.retrieveMemberPerID(Integer.parseInt(rower)).
+                    addAutoNotification(new MemberNotification(
+                            "rowers: " + rowersArr.toString() + "added to booking" + bookingID));
+        }
     }
 
     @Override

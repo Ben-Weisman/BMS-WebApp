@@ -6,9 +6,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import constants.Constants;
+import engine.alerts.MemberNotification;
 import engine.classes.boat.BoatType;
 import engine.classes.booking.Booking;
 import engine.classes.booking.BookingDetails;
+import engine.classes.member.Member;
 import engine.customExceptions.InvalidInputException;
 import engine.engine.BMSEngine;
 import jdk.nashorn.internal.parser.JSONParser;
@@ -82,6 +84,8 @@ public class NewBookingRequestServlet extends HttpServlet {
                 message = "Booking created successfully";
                 responseJsonOBJECT.addProperty("status", status);
                 responseJsonOBJECT.addProperty("message", message);
+                notifyMembers(engine, newBookingDetails);
+
             } catch (DateTimeParseException e) {
 
                 message = "Could not read the date.";
@@ -110,6 +114,15 @@ public class NewBookingRequestServlet extends HttpServlet {
         out.flush();
 
 
+    }
+
+    private void notifyMembers(BMSEngine engine, BookingDetails newBookingDetails) {
+        Member memberOrdered =  engine.retrieveMemberPerID(newBookingDetails.getUserID());
+        memberOrdered.addAutoNotification(new MemberNotification("Booking added"));
+        for (Integer otherRowerID : newBookingDetails.getOtherParticipatingRowersIDs()) {
+            engine.retrieveMemberPerID(otherRowerID).addAutoNotification(
+                    new MemberNotification(memberOrdered.getName() +  " created booking with you"));
+        }
     }
 
     private BookingDetails initBookingRequestDetails(JsonObject jsonObject, BMSEngine engine) throws DateTimeParseException {

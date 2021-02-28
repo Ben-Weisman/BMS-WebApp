@@ -4,8 +4,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import constants.Constants;
+import engine.alerts.MemberNotification;
 import engine.classes.boat.BoatType;
 import engine.classes.booking.Booking;
+import engine.classes.member.Member;
 import engine.customExceptions.InvalidInputException;
 import engine.engine.BMSEngine;
 import utils.ServletUtils;
@@ -68,6 +70,8 @@ public class UpdateBookingBoatTypeServlet extends HttpServlet {
 
         try {
             engine.editRequestedBoatType(newTypes,theBooking);
+            notifyRowers(engine, theBooking, newTypes);
+
         } catch (InvalidInputException e) {
             status = "error";
             message = "Illegal input provided, please try again.";
@@ -86,5 +90,14 @@ public class UpdateBookingBoatTypeServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         out.println(respJSON.toString());
         out.flush();
+    }
+
+    private void notifyRowers(BMSEngine engine, Booking theBooking, List<BoatType> newTypes) {
+        Member memberOrdered = engine.retrieveMemberPerID(theBooking.getMemberOrderedID());
+        memberOrdered.addAutoNotification(new MemberNotification("Booking boat types updated to " + newTypes));
+        for (Integer otherRowerID : theBooking.getOtherParticipatingRowersID()) {
+            engine.retrieveMemberPerID(otherRowerID).addAutoNotification(
+                    new MemberNotification("Booking boat types updated to " + newTypes));
+        }
     }
 }

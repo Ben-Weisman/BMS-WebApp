@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import constants.Constants;
+import engine.alerts.MemberNotification;
 import engine.classes.member.Member;
 import engine.customExceptions.BoatAssignmentException;
 import engine.customExceptions.InvalidInputException;
@@ -70,6 +71,9 @@ public class UpdateBookingAssignedBoatID extends HttpServlet {
             engine.updateBookingAssignedBoatID(bookingIDToUpdate,assignedBoatID);
             message = "Update finished successfully.";
             status = "ok";
+
+            notifyRowers(engine, bookingIDToUpdate, assignedBoatID);
+
         } catch (BoatAssignmentException | InvalidInputException | NotfoundException | JAXBException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -84,6 +88,15 @@ public class UpdateBookingAssignedBoatID extends HttpServlet {
         out.flush();
 
 
+    }
+
+    private void notifyRowers(BMSEngine engine, int bookingIDToUpdate, int assignedBoatID) {
+        Member memberOrdered = engine.retrieveMemberPerID(engine.retrieveBookingPerID(bookingIDToUpdate).getMemberOrderedID());
+        memberOrdered.addAutoNotification(new MemberNotification("Booking's Assigned boat id changed to " + assignedBoatID));
+        for (Integer otherRowerID : engine.retrieveBookingPerID(bookingIDToUpdate).getOtherParticipatingRowersID()) {
+            engine.retrieveMemberPerID(otherRowerID).addAutoNotification(
+                    new MemberNotification("Booking's Assigned boat id changed to " + assignedBoatID));
+        }
     }
 
 

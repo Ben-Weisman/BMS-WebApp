@@ -4,7 +4,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import constants.Constants;
+import engine.alerts.MemberNotification;
 import engine.classes.booking.Booking;
+import engine.classes.member.Member;
 import engine.classes.windows.ScheduleWindow;
 import engine.customExceptions.ExportToXmlException;
 import engine.engine.BMSEngine;
@@ -21,6 +23,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Path;
+import java.time.LocalDate;
 
 @WebServlet(name = "UpdateBookingWindow" , urlPatterns = "/updateWindow")
 public class UpdateBookingWindow extends HttpServlet {
@@ -66,6 +69,7 @@ public class UpdateBookingWindow extends HttpServlet {
         JsonObject respJSON = new JsonObject();
         try {
             engine.editBookingWindow(newWindow,theBooking);
+            notifyRowers(engine, bookingID, theBooking);
         } catch (ExportToXmlException | JAXBException e) {
             status = "error";
             message = "Failed to save the changes to the DB";
@@ -80,5 +84,15 @@ public class UpdateBookingWindow extends HttpServlet {
         out.println(respJSON.toString());
         out.flush();
 
+    }
+
+    private void notifyRowers(BMSEngine engine, int bookingID, Booking theBooking) {
+        Member memberOrdered = engine.retrieveMemberPerID(theBooking.getMemberOrderedID());
+        memberOrdered.addAutoNotification(new MemberNotification(
+                "Booking's : " + bookingID +  " schedule window was updated"));
+        for (Integer otherRowerID : theBooking.getOtherParticipatingRowersID()) {
+            engine.retrieveMemberPerID(otherRowerID).addAutoNotification(
+                    new MemberNotification( "Booking's : " + bookingID +  " schedule window was updated"));
+        }
     }
 }

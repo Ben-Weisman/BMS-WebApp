@@ -4,7 +4,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import constants.Constants;
+import engine.alerts.MemberNotification;
 import engine.classes.booking.Booking;
+import engine.classes.member.Member;
 import engine.engine.BMSEngine;
 import utils.ServletUtils;
 import utils.SessionUtils;
@@ -54,8 +56,17 @@ public class UpdateBookingDateServlet extends HttpServlet {
 
         bookingToChange.setRequestedPracticeDate(LocalDate.parse(jsonDate));
 
+        notifyRowers(engine, jsonDate, bookingToChange);
 
+    }
 
+    private void notifyRowers(BMSEngine engine, String jsonDate, Booking bookingToChange) {
+        Member memberOrdered = engine.retrieveMemberPerID(bookingToChange.getMemberOrderedID());
+        memberOrdered.addAutoNotification(new MemberNotification("Booking date updated to " + LocalDate.parse(jsonDate)));
+        for (Integer otherRowerID : bookingToChange.getOtherParticipatingRowersID()) {
+            engine.retrieveMemberPerID(otherRowerID).addAutoNotification(
+                    new MemberNotification("Booking date updated to " + LocalDate.parse(jsonDate)));
+        }
     }
 
 }
