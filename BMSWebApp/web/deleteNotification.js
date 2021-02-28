@@ -6,7 +6,7 @@ async function submitNotification() {
     const data = {
         message: message
     }
-    await fetch('/BMSWebApp/notifications/deleteNotification', {
+    await fetch('/BMSWebApp/deleteNotification', {
         method: 'POST',
         headers: new Headers({
             'Content-Type': 'application/json;charset=utf-8'

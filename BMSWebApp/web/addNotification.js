@@ -7,7 +7,7 @@ async function submitNotification() {
     const data = {
         message: message
     }
-    await fetch('sendNotification', {
+    await fetch('/BMSWebApp/sendNotification', {
         method: 'POST',
         headers: new Headers({
             'Content-Type': 'application/json;charset=utf-8'
