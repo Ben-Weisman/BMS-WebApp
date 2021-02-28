@@ -4,6 +4,7 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/BMSWebApp/web/addRowers.html" value="file://$PROJECT_DIR$/BMSWebApp/web" />
+        <entry key="file://$PROJECT_DIR$/BMSWebApp/web/maintain/add/addListing.html" value="file://$PROJECT_DIR$/BMSWebApp/web" />
         <entry key="file://$PROJECT_DIR$/BMSWebApp/web/maintain/update/updateBookingRequest.html" value="file://$PROJECT_DIR$/BMSWebApp/web/maintain/update" />
       </map>
     </option>

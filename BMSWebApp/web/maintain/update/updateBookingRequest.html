@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="/BMSWebApp/pageLayout.css">
     <title>Update Booking Request</title>
 </head>
 <body>
+<div id="sideNav" class="sideNav">
+    <nav>
+    </nav>
+</div>
 <form id="checkIfBookingExistForm">
     <label for="bookingID">Booking ID </label>
     <input type="number" name="bookingID" id="bookingID" autofocus min="1" required><br>
@@ -74,6 +78,7 @@
     <ul id="listingListPlaceHolder"></ul>
     <script src="/BMSWebApp/maintain/view/viewListing.js"></script>
 </div>
+<script type="text/javascript" src="/BMSWebApp/sideBarNav.js"></script>
 
 <script src="updateBookingRequest.js"></script>
 
