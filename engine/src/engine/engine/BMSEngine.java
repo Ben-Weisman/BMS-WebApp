@@ -283,4 +283,7 @@ public interface BMSEngine {
     public Member getMemberPerUsername(String email);
 
     List<BoatType> getBoatTypeListFromStringArray(String[] boatTypesAsStringArray);
+
+    void removeRowersFromBooking(int bookingID, List<Integer> rowersIDs);
+
 }

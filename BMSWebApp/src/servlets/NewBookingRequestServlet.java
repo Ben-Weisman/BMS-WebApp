@@ -24,8 +24,10 @@ import javax.xml.bind.JAXBException;
 import java.io.BufferedReader;
 import java.io.FilterInputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,7 +49,7 @@ public class NewBookingRequestServlet extends HttpServlet {
          */
 
 
-        if (!SessionUtils.validateSession(req)){
+        if (!SessionUtils.validateSession(req)) {
             resp.sendRedirect(Constants.LOGIN_PAGE_URL);
             return;
         }
@@ -59,23 +61,53 @@ public class NewBookingRequestServlet extends HttpServlet {
         BufferedReader reader = req.getReader();
         String line;
         BookingDetails newBookingDetails;
-        while ((line = reader.readLine()) != null){
+        while ((line = reader.readLine()) != null) {
             builder.append(line);
         }
         streamData = builder.toString();
 
         JsonElement jsonElement = JsonParser.parseString(streamData);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
+        String status = "error";
+        String message;
+
+        JsonObject responseJsonOBJECT = new JsonObject();
+
+
         if (validateJsonFields(jsonObject)) {
             try {
                 newBookingDetails = initBookingRequestDetails(jsonObject, engine);
                 engine.addNewBookingRequest(newBookingDetails);
-            }catch (DateTimeParseException | InvalidInputException | JAXBException e){
+                status = "ok";
+                message = "Booking created successfully";
+                responseJsonOBJECT.addProperty("status", status);
+                responseJsonOBJECT.addProperty("message", message);
+            } catch (DateTimeParseException e) {
+
+                message = "Could not read the date.";
+                responseJsonOBJECT.addProperty("status", status);
+                responseJsonOBJECT.addProperty("message", message);
                 System.out.println(e.getMessage());
-                resp.sendError(403,"Could not create new booking due to data corruption");
+                resp.sendError(403, "Could not create new booking");
+            } catch (InvalidInputException e) {
+                message = "Input value is illegal.";
+                responseJsonOBJECT.addProperty("status", status);
+                responseJsonOBJECT.addProperty("message", message);
+                System.out.println(e.getMessage());
+                resp.sendError(403, "Could not create new booking");
+            } catch (JAXBException e) {
+                message = "Failed to save changes to DB";
+                responseJsonOBJECT.addProperty("status", status);
+                responseJsonOBJECT.addProperty("message", message);
+                System.out.println(e.getMessage());
+                resp.sendError(403, "Could not create new booking");
             }
         }
-
+        String json = new Gson().toJson(responseJsonOBJECT);
+        resp.setContentType("application/json");
+        PrintWriter out = resp.getWriter();
+        out.println(json);
+        out.flush();
 
 
     }
@@ -84,18 +116,29 @@ public class NewBookingRequestServlet extends HttpServlet {
 
 
         int memberOrderedID = jsonObject.get("memberOrderedID").getAsInt();
+        List<Integer> otherParticipatingRowersIDs = new ArrayList<>();
+        List<BoatType> requestedBoatTypes = new ArrayList<>();
 
-        String[] boatTypesAsStringArray = new Gson().fromJson(jsonObject.get("requestedBoatTypes").toString(), String[].class);
-        List<BoatType> requestedBoatTypes = engine.getBoatTypeListFromStringArray(boatTypesAsStringArray);
+        String boatTypesAsString = new Gson().fromJson(jsonObject.get("requestedBoatTypes").toString().trim(), String.class);
+        if (!boatTypesAsString.equals("")){
+            String[] boatsArray = boatTypesAsString.split(",");
+            requestedBoatTypes = engine.getBoatTypeListFromStringArray(boatsArray);
+        }
 
-        int[] otherRowersIDsDataFromJson = new Gson().fromJson(jsonObject.get("otherParticipatingRowersIDs").toString(),int[].class);
-        List<Integer> otherParticipatingRowersIDs = Arrays.stream(otherRowersIDsDataFromJson).boxed().collect(Collectors.toList());
 
+        String otherRowersIDsString = new Gson().fromJson(jsonObject.get("otherParticipatingRowersIDs").toString().trim(), String.class);
+        if (!otherRowersIDsString.equals("")) {
+            String[] otherRowersIDStringArray = otherRowersIDsString.split(",");
+            int[] idAsIntArr = new int[otherRowersIDStringArray.length];
+            for (int i = 0; i < otherRowersIDStringArray.length; i++) {
+                idAsIntArr[i] = Integer.parseInt(otherRowersIDStringArray[i]);
+            }
+            otherParticipatingRowersIDs = Arrays.stream(idAsIntArr).boxed().collect(Collectors.toList());
+        }
         int requestedWindowID = jsonObject.get("requestedWindowID").getAsInt();
-
         String requestedPracticeDateFromJson = jsonObject.get("requestedPracticeDate").getAsString();
         LocalDate requestedPracticeDate = LocalDate.parse(requestedPracticeDateFromJson);
-        return  new BookingDetails(memberOrderedID, requestedBoatTypes,otherParticipatingRowersIDs,requestedWindowID, requestedPracticeDate);
+        return new BookingDetails(memberOrderedID, requestedBoatTypes, otherParticipatingRowersIDs, requestedWindowID, requestedPracticeDate);
     }
 
     private boolean validateJsonFields(JsonObject jsonObject) {
@@ -115,12 +158,12 @@ public class NewBookingRequestServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req,resp);
+        processRequest(req, resp);
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        processRequest(req,resp);
+        processRequest(req, resp);
     }
 
 }

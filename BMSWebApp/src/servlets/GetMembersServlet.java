@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -29,8 +30,11 @@ public class GetMembersServlet extends HttpServlet {
         }
 
         BMSEngine engine = ServletUtils.getEngine(getServletContext());
-        List<Member> members = engine.getMembers();
-        members.remove(SessionUtils.getMemberObject(req));
+        List<Member> members = new ArrayList<>();
+        for (Member m : engine.getMembers()){
+            if (m.getID() != SessionUtils.getMemberObject(req).getID())
+                members.add(m);
+        }
         String json = new Gson().toJson(members);
         resp.setContentType("application/json");
         PrintWriter out = resp.getWriter();

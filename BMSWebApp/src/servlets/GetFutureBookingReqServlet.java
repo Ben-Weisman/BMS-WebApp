@@ -21,10 +21,13 @@ import java.io.PrintWriter;
 import java.util.List;
 
 
-@WebServlet(name = "GetBookingsServlet", urlPatterns = "/GetBookings")
-public class GetBookingsServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+@WebServlet(name = "GetFutureBookingReqServlet", urlPatterns = "/futureBookings")
+public class GetFutureBookingReqServlet extends HttpServlet {
+
+    private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+// requests for bookings are possible in two fashions:
+        // 1. Get future bookings
+        // 2. Get pending bookings
 
         if (!SessionUtils.validateSession(req)){
             resp.sendRedirect(Constants.LOGIN_PAGE_URL);
@@ -33,36 +36,29 @@ public class GetBookingsServlet extends HttpServlet {
 
         BMSEngine engine = ServletUtils.getEngine(getServletContext());
         Integer userID = SessionUtils.getMemberID(req);
-        StringBuilder builder = new StringBuilder();
-        String line;
-        String streamData;
-        BufferedReader reader = req.getReader();
-        String listStyleParam;
-        List<Booking> resBookingList;
-        String json;
+        List<Booking> resList = engine.generateAllFutureBookingRequests(userID);
 
-        while ((line = reader.readLine()) != null){
-            builder.append(line);
-        }
-
-        streamData = builder.toString();
-        JsonElement jsonElement = JsonParser.parseString(streamData);
-        JsonObject jsonObject = jsonElement.getAsJsonObject();
-
-        listStyleParam = jsonObject.get(Constants.LIST_STYLE_PARAM_JSON).toString();
-        resBookingList = getListByParam(listStyleParam,engine,userID);
-        json = new Gson().toJson(resBookingList);
-
-        resp.setContentType("application/json");
+        String resJson = new Gson().toJson(resList);
         PrintWriter out = resp.getWriter();
-        out.println(json);
+        resp.setContentType("application/json");
+        out.println(resJson);
         out.flush();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        processRequest(req, resp);
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        processRequest(req, resp);
     }
 
     private List<Booking> getListByParam(String listStyleParam, BMSEngine engine, Integer userID) {
          switch (listStyleParam.toLowerCase()) {
              case "pending" : return engine.getPendingBookingRequests();
-            case "all" : return engine.getBookingList();
             case "future" : return engine.generateAllFutureBookingRequests(userID);
             default : return null;
         }

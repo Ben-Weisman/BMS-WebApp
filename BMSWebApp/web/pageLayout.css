@@ -1,8 +1,12 @@
+
+* {
+    box-sizing: border-box;
+}
+
 .nav{
     list-style-type: none;
     margin: 0;
     padding: 0;
-    /*width: 200px;*/
     background-color: #f1f1f1;
 }
 
@@ -28,7 +32,6 @@ li a {
     text-decoration: none;
 }
 
-/* Change the link color on hover */
 li a:hover {
     background-color: #555;
     color: white;
@@ -52,15 +55,37 @@ li a:hover {
     overflow: hidden;
     background-color: blue;
     width: 20%;
-    height: 70%;
+    height: 80%;
     float: inside;
 }
 
 #windows{
     float: left;
     overflow: hidden;
-    background-color: blue;
     width: 30%;
+    height: 100%;
+    margin-left: 5%;
+}
+
+#bookings{
+    float: left;
+    overflow: hidden;
+    width: 25%;
+    height: 100%;
+    margin-left: 5%;
+}
+
+#boats{
+    float: left;
+    overflow: hidden;
+    width: 25%;
+    height: 100%;
+    margin-left: 5%;
+}
+#members{
+    float: left;
+    overflow: hidden;
+    width: 25%;
     height: 100%;
     margin-left: 5%;
 }
@@ -83,7 +108,7 @@ li a:hover {
     text-align: center;
     text-decoration: none;
     cursor: pointer;
-    width: 100%;
+    width: 80%;
     height: 100%;
 
     display: block;
@@ -109,4 +134,28 @@ li a:hover {
     border:solid 1px #aacfe4;
     width:30%;
     margin:2px 0 20px 10px;
+}
+
+#options input{
+    display: block;
+    padding:4px 2px;
+    border:solid 1px #aacfe4;
+    width:30%;
+    margin:2px 0 20px 10px;
+
+    float: left;
+    height: 100%;
+}
+#options{
+    float: left;
+    width: 40%;
+    height: 100%;
+    margin-left: 5%;
+}
+
+#optionsInfo{
+    float: left;
+    width: 40%;
+    height: 100%;
+    margin-left: 5%;
 }

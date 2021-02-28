@@ -1,7 +1,9 @@
 package servlets;
 
+import constants.Constants;
 import engine.customExceptions.NotfoundException;
 import utils.ServletUtils;
+import utils.SessionUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +18,13 @@ import java.util.stream.Collectors;
 public class RemoveScheduleWindowServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        if (!SessionUtils.validateSession(req)){
+            resp.sendRedirect(Constants.LOGIN_PAGE_URL);
+            return;
+        }
+
+
         System.out.println("removeScheduleWindowServlet: entered doPost");
         BufferedReader reader = req.getReader();
         String scheduleWindowName = reader.lines().collect(Collectors.joining());

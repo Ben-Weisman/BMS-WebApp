@@ -38,32 +38,6 @@ function showForm(fieldName){
             personalInfoFormEL.innerHTML = html;
             break;
     }
-
-
-    // personalInfoFormEL.setAttribute('class',"updatePersonalInfoForm");
-    // personalInfoFormEL.setAttribute('id',"updatePersonalInfoForm");
-    // personalInfoFormEL.setAttribute('name',fieldName);
-    // personalInfoFormEL.setAttribute('action','updateMemberData');
-    // personalInfoFormEL.setAttribute('method','post');
-    // personalInfoFormEL.setAttribute('submit','validateForm()');
-    //
-    // let i = document.createElement('input');
-    // i.setAttribute('type','text');
-    // i.setAttribute('name','param');
-    // i.setAttribute('id','valueText')
-    //
-    // let s = document.createElement('input');
-    // s.setAttribute('type','submit');
-    // s.setAttribute('value','submit');
-    //
-    // let text = document.createTextNode('Please enter the new ' + fieldName + '  ');
-    // let label = document.createElement('label');
-    // label.appendChild(text);
-    // personalInfoFormEL.appendChild(label);
-    // personalInfoFormEL.appendChild(i);
-    // personalInfoFormEL.appendChild(s);
-    // infoDivEL.append(personalInfoFormEL);
-
 }
 
 function clearFormDisplay(){
@@ -146,7 +120,6 @@ async function validateForm(event) {
     }
     const response = await postData(param, personalInfoFormEL.name);
     const json = await response.json();
-    //handleResponse(json)
 
 
     console.log(json);

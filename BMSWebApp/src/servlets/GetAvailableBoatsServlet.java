@@ -25,9 +25,7 @@ import java.util.List;
 @WebServlet(name = "GetAvailableBoatsServlet", urlPatterns = "/getAvailableBoats")
 public class GetAvailableBoatsServlet extends HttpServlet {
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+    private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         if (!SessionUtils.validateSession(req)){
             resp.sendRedirect(Constants.LOGIN_PAGE_URL);
             return;
@@ -35,16 +33,16 @@ public class GetAvailableBoatsServlet extends HttpServlet {
         BMSEngine engine = ServletUtils.getEngine(getServletContext());
 
         String line;
-        StringBuilder streamData = new StringBuilder();
-        String json;
+        StringBuilder builder = new StringBuilder();
+        String streamData;
         BufferedReader reader = req.getReader();
 
         while ((line = reader.readLine()) != null){
-            streamData.append(line);
+            builder.append(line);
         }
-        json = streamData.toString();
+        streamData = builder.toString();
 
-        JsonElement jsonElement = JsonParser.parseString(json);
+        JsonElement jsonElement = JsonParser.parseString(streamData);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         int bookingID = jsonObject.get("bookingID").getAsInt();
         List<Boat> resBoatList = engine.getAvailableBoats(bookingID);
@@ -56,7 +54,18 @@ public class GetAvailableBoatsServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         out.println(responseJson);
         out.flush();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        processRequest(req,resp);
 
 
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        processRequest(req, resp);
     }
 }

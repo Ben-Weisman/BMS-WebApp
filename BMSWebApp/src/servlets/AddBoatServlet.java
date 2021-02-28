@@ -1,10 +1,12 @@
 package servlets;
 
 import com.google.gson.Gson;
+import constants.Constants;
 import engine.customExceptions.InvalidBoatNameException;
 import engine.customExceptions.InvalidTypeException;
 import engine.engine.BMSEngine;
 import utils.ServletUtils;
+import utils.SessionUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +23,12 @@ public class AddBoatServlet extends HttpServlet {
     private Gson gson = new Gson();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        if (!SessionUtils.validateSession(req)){
+            resp.sendRedirect(Constants.LOGIN_PAGE_URL);
+            return;
+        }
+
         System.out.println("addBoatServlet: entered doPost");
         BufferedReader reader = req.getReader();
         String boatJsonString = reader.lines().collect(Collectors.joining());

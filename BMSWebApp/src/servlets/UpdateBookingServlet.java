@@ -1,6 +1,7 @@
 package servlets;
 
 import com.google.gson.Gson;
+import constants.Constants;
 import engine.classes.boat.BoatType;
 import engine.customExceptions.BoatAssignmentException;
 import engine.customExceptions.ExportToXmlException;
@@ -8,6 +9,7 @@ import engine.customExceptions.InvalidInputException;
 import engine.customExceptions.NotfoundException;
 import engine.engine.BMSEngine;
 import utils.ServletUtils;
+import utils.SessionUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,6 +29,12 @@ import java.util.stream.Collectors;
 public class UpdateBookingServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        if (!SessionUtils.validateSession(req)){
+            resp.sendRedirect(Constants.LOGIN_PAGE_URL);
+            return;
+        }
+
         BufferedReader reader = req.getReader();
         String updateBookingJsonString = reader.lines().collect(Collectors.joining());
 

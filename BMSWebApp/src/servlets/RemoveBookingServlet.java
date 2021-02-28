@@ -1,8 +1,14 @@
 package servlets;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import constants.Constants;
 import engine.customExceptions.ExportToXmlException;
 import engine.customExceptions.NotfoundException;
+import engine.engine.BMSEngine;
 import utils.ServletUtils;
+import utils.SessionUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,14 +24,31 @@ import java.util.stream.Collectors;
 public class RemoveBookingServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("removeBookingServlet: entered doPost");
+
+        if (!SessionUtils.validateSession(req)){
+            resp.sendRedirect(Constants.LOGIN_PAGE_URL);
+            return;
+        }
+
+        StringBuilder builder = new StringBuilder();
+        String streamData;
+        String line;
         BufferedReader reader = req.getReader();
-        String bookingID = reader.lines().collect(Collectors.joining());
+
+        while ((line = reader.readLine()) != null){
+            builder.append(line);
+        }
+        streamData = builder.toString();
+
+        JsonElement jsonElement = JsonParser.parseString(streamData);
+        JsonObject jsonObject = jsonElement.getAsJsonObject();
+        String bookingID = jsonObject.get("bookingID").getAsString();
+
 
         try {
             ServletUtils.getEngine(getServletContext()).removeBookingRequest(bookingID);
             resp.setStatus(HttpServletResponse.SC_OK);
-            resp.getWriter().write("ID: " + bookingID + " was removed successful");
+            resp.getWriter().write("ID: " + bookingID + " was removed successfully");
         } catch (NotfoundException e) {
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             resp.getWriter().write(e.getMessage());

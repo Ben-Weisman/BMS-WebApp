@@ -3,12 +3,8 @@
   <component name="WebContextManager">
     <option name="state">
       <map>
-        <entry key="file://$PROJECT_DIR$/BMSWebApp/web/maintain/add/addMember.html" value="file://$PROJECT_DIR$/BMSWebApp/web/maintain/add" />
-        <entry key="file://$PROJECT_DIR$/BMSWebApp/web/maintain/remove/removeBoat.html" value="file://$PROJECT_DIR$/BMSWebApp/web/maintain/remove" />
-        <entry key="file://$PROJECT_DIR$/BMSWebApp/web/maintain/update/updateBoat.html" value="file://$PROJECT_DIR$/BMSWebApp/web/maintain/update" />
+        <entry key="file://$PROJECT_DIR$/BMSWebApp/web/addRowers.html" value="file://$PROJECT_DIR$/BMSWebApp/web" />
         <entry key="file://$PROJECT_DIR$/BMSWebApp/web/maintain/update/updateBookingRequest.html" value="file://$PROJECT_DIR$/BMSWebApp/web/maintain/update" />
-        <entry key="file://$PROJECT_DIR$/BMSWebApp/web/maintain/update/updateMember.html" value="file://$PROJECT_DIR$/BMSWebApp/web/maintain/update" />
-        <entry key="file://$PROJECT_DIR$/BMSWebApp/web/xml/export/exportListings.html" value="file://$PROJECT_DIR$/BMSWebApp/web/xml/export" />
       </map>
     </option>
   </component>

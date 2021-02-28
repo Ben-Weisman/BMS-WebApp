@@ -2,22 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Menu</title>
     <link rel="stylesheet" href="pageLayout.css">
 
 </head>
 <body>
-<nav>
-    <div class="container">
-        <div id = "sideNav" class="sideNav">
-        </div>
-        <div id="info" class="info">
-            <form id = "updatePersonalInfoForm"> </form>
-        </div>
+<div class="container">
+    <div id="sideNav" class="sideNav">
+        <nav></nav>
     </div>
-</nav>
+    <div id="exportOptions">
+        <h3>Select a Boats XML File:</h3>
+
+        <form id="importBoats">
+            <input type="file" name="boats" accept=".xml" id="boatsFile" required><br>
+            <input type="Submit" value="Upload File"><br>
+        </form>
+
+        <h3>Select a Members XML File:</h3>
+        <form id="importMembers">
+            <input type="file" name="members" accept=".xml" id="membersFile" required><br>
+            <input type="Submit" value="Upload File"><br>
+        </form>
+
+        <h3>Select a Schedule Windows XML File:</h3>
+        <form id="importScheduleWindows">
+            <input type="file" name="scheduleWindows" accept=".xml" id="scheduleWindowsFile" required><br>
+            <input type="Submit" value="Upload File"><br>
+        </form>
+        <h2 class="messagePlaceHolder"></h2>
+
+
+    </div>
+</div>
 
 <script type="text/javascript" src="sideBarNav.js"></script>
-
+<script src="importListing.js"></script>
 </body>
 </html>

@@ -69,9 +69,9 @@ public class LoginServlet extends HttpServlet {
             // Set session attributes.
             req.getSession(true).setAttribute(Constants.MEMBER_ID, member.getID());
             req.getSession(true).setAttribute(Constants.MEMBER_OBJECT, member);
-            if (member.isAdmin())
+//            if (member.isAdmin())
                 resp.sendRedirect(Constants.MAIN_MENU_URL_ADMIN);
-            else resp.sendRedirect(Constants.MAIN_MENU_URL_REGULAR);
+//            else resp.sendRedirect(Constants.MAIN_MENU_URL_REGULAR);
         }
     }
 

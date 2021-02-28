@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Main Menu</title>
+    <link rel="stylesheet" href="pageLayout.css">
+
+<!-- Show all future booking requests-->
+
+</head>
+<body>
+<div class="container">
+    <div id="sideNav" class="sideNav"><nav>
+    </nav></div>
+    <div id="editBookingForm">
+        <form id="boatTypeForm">
+            <label>Enter the booking ID you wish to update</label>
+            <input type="text" id="bookingIDInput"><br>
+            <label>Enter New Boat Type</label>
+            <input type="text" id="boatType"><br><br>
+            <input type="submit" value="Submit"><br><br>
+            <span>The allowed types are: </span><br>
+            <span>SINGLE("1X")  ,  DOUBLE("2X"), COXED_DOUBLE("2X+")  ,  PAIR("2-")</span><br>
+            <span>COXED_PAIR("2+")  ,  FOUR("4-"), COXED_FOUR("4+"),  QUAD("4X-")  ,  COXED_QUAD("4X+")</span><br>
+            <span>OCTUPLE("8X+")  ,EIGHT("8+")</span>
+        </form>
+    </div>
+</div>
+
+
+
+<script type="text/javascript" src="sideBarNav.js"></script>
+<script type="text/javascript" src="editBoatType.js"></script>
+
+</body>
+</html>

@@ -1,6 +1,7 @@
 package servlets;
 
 import com.google.gson.Gson;
+import constants.Constants;
 import engine.classes.boat.BoatType;
 import engine.classes.member.Level;
 import engine.classes.member.MemberDetails;
@@ -8,6 +9,7 @@ import engine.classes.windows.ScheduleWindowDetails;
 import engine.customExceptions.ExportToXmlException;
 import engine.customExceptions.InvalidInputException;
 import utils.ServletUtils;
+import utils.SessionUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,6 +28,16 @@ public class AddScheduleWindowServlet extends HttpServlet {
     private Gson gson = new Gson();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
+        if (!SessionUtils.validateSession(req)){
+            resp.sendRedirect(Constants.LOGIN_PAGE_URL);
+            return;
+        }
+
+
+
+
         System.out.println("addScheduleWindowServlet: entered doPost");
         BufferedReader reader = req.getReader();
         String ScheduleWindowJsonString = reader.lines().collect(Collectors.joining());

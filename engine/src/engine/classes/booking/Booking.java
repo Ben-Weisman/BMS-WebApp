@@ -127,12 +127,13 @@ public class Booking implements Serializable {
         }
         return false;
     }
-    
+
+    public int getNumberParticipates(){
+        return (otherParticipatingRowersIDs.size() + 1);
+    }
+
     public void removeParticipatingRower(int participatingRowerID){
-        for (Integer rowerID : otherParticipatingRowersIDs){
-            if (participatingRowerID == rowerID)
-                otherParticipatingRowersIDs.remove(rowerID);
-        }
+        otherParticipatingRowersIDs.removeIf(rowerID -> participatingRowerID == rowerID);
     }
 
     public void setAssignedBoatID(int boatID) {

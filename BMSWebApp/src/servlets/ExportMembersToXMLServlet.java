@@ -1,7 +1,9 @@
 package servlets;
 
+import constants.Constants;
 import engine.customExceptions.ExportToXmlException;
 import utils.ServletUtils;
+import utils.SessionUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +18,12 @@ import java.io.PrintWriter;
 public class ExportMembersToXMLServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        if (!SessionUtils.validateSession(req)){
+            resp.sendRedirect(Constants.LOGIN_PAGE_URL);
+            return;
+        }
+
         System.out.println("entered ExportMembersServlet");
         resp.setContentType("application/xml");
         try(PrintWriter out = resp.getWriter()){

@@ -1,9 +1,11 @@
 package servlets;
 
 import com.google.gson.Gson;
+import constants.Constants;
 import engine.classes.member.Level;
 import engine.classes.member.MemberDetails;
 import utils.ServletUtils;
+import utils.SessionUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +23,13 @@ public class AddMemberServlet extends HttpServlet {
     private Gson gson = new Gson();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        if (!SessionUtils.validateSession(req)){
+            resp.sendRedirect(Constants.LOGIN_PAGE_URL);
+            return;
+        }
+
+
         System.out.println("addMemberServlet: entered doPost");
         BufferedReader reader = req.getReader();
         String memberJsonString = reader.lines().collect(Collectors.joining());

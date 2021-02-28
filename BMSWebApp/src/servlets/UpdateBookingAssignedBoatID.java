@@ -13,6 +13,7 @@ import utils.ServletUtils;
 import utils.SessionUtils;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +21,10 @@ import javax.servlet.http.HttpSession;
 import javax.xml.bind.JAXBException;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 
+
+@WebServlet(name = "UpdateBookingAssignedBoatID", urlPatterns = "/assignBoat")
 public class UpdateBookingAssignedBoatID extends HttpServlet {
 
 
@@ -53,16 +57,32 @@ public class UpdateBookingAssignedBoatID extends HttpServlet {
         JsonElement jsonElement = JsonParser.parseString(streamData);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
 
-        int bookingIDToUpdate = jsonObject.get("bookingIDToUpdate").getAsInt();
-        int assignedBoatID = jsonObject.get("assignedBoatID").getAsInt();
+        int bookingIDToUpdate = jsonObject.get("bookingID").getAsInt();
+        int assignedBoatID = jsonObject.get("boatID").getAsInt();
+
+        JsonObject respJSON = new JsonObject();
+        String message;
+        String status = "error";
+
+
 
         try {
             engine.updateBookingAssignedBoatID(bookingIDToUpdate,assignedBoatID);
-        } catch (BoatAssignmentException | InvalidInputException | NotfoundException e) {
-            resp.sendError(500, "Boat assignment failed");
-        }  catch (JAXBException e) {
-            resp.sendError(500, "Boat assignment succeeded but could not save changes");
+            message = "Update finished successfully.";
+            status = "ok";
+        } catch (BoatAssignmentException | InvalidInputException | NotfoundException | JAXBException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            message = e.getMessage();
         }
+
+        respJSON.addProperty("message",message);
+        respJSON.addProperty("status",status);
+        resp.setContentType("application/json");
+        PrintWriter out = resp.getWriter();
+        out.println(respJSON.toString());
+        out.flush();
+
 
     }
 

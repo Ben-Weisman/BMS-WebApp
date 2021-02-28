@@ -878,9 +878,10 @@ public class Engine implements BMSEngine {
 
         if (numRowersInBooking > boatCapacity) {
             throw new BoatAssignmentException("Number of rowers is bigger than the boat capacity. Please assign bigger boat or remove some of the rowers from this order" +
-                    "\nBoat capacity: " + boat.getBoatType().getRowersAmount());
+                    "\nBoat capacity: " + boat.getBoatType().getRowersAmount() + "\nNumber of rowers in booking: " + bookingToUpdate.getNumberParticipates());
         } else if (numRowersInBooking < boatCapacity)
-            throw new BoatAssignmentException("Number of rowers is less than the boat capacity. Please assign smaller boat or add more rowers to this order");
+            throw new BoatAssignmentException("Number of rowers is less than the boat capacity. Please assign smaller boat or add more rowers to this order." +
+                    "\nBoat Capacity: " + boat.getBoatType().getRowersAmount() + "\nNumber of rowers in booking: " + bookingToUpdate.getNumberParticipates());
     }
 
     @Override
@@ -1690,6 +1691,15 @@ public class Engine implements BMSEngine {
                 resList.add(type);
         }
         return resList;
+    }
+
+    @Override
+    public void removeRowersFromBooking(int bookingID, List<Integer> rowersIDs) {
+        Booking booking = retrieveBookingPerID(bookingID);
+
+        for(Integer id: rowersIDs)
+            booking.removeParticipatingRower(id);
+
     }
 
 }

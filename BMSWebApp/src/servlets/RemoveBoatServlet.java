@@ -1,8 +1,10 @@
 package servlets;
 
 import com.google.gson.Gson;
+import constants.Constants;
 import engine.customExceptions.*;
 import utils.ServletUtils;
+import utils.SessionUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +21,13 @@ public class RemoveBoatServlet extends HttpServlet {
     private Gson gson = new Gson();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        if (!SessionUtils.validateSession(req)){
+            resp.sendRedirect(Constants.LOGIN_PAGE_URL);
+            return;
+        }
+
+
         System.out.println("removeBoatServlet: entered doPost");
         BufferedReader reader = req.getReader();
         String removeBoatJsonString = reader.lines().collect(Collectors.joining());
